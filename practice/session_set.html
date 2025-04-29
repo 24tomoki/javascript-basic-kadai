@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript基礎編</title>
+</head>
+
+<body>
+  <h1>ユーザー名を入力してください。</h1>
+  <input type="text" id="userNameInput">
+  <button id="save-btn">保存</button>
+  <script>
+    // 保存ボタンのHTML要素を取得
+    const button = document.getElementById('save-btn');
+
+    // 保存ボタンのクリック時にユーザー名を保存する
+    button.addEventListener('click', () => {
+      // ユーザー名の入力内容を取得
+      const userName = document.getElementById('userNameInput').value;
+
+      // Session Storageにユーザー名を保存
+      sessionStorage.setItem('userName', userName);
+
+      // 別のWebページに遷移
+      location.href = 'session_get.html';
+    });
+
+    function getCookie(name) {
+      // クッキーを取得
+      // 「;」で区切り、個々のクッキーを配列で取得
+      const cookies = document.cookie.split(';');
+
+      // クッキーをfor文で1つずつチェック
+      for (let i = 0; i < cookies.length; i++) {
+        // 「=」でクッキーを分割し、クッキー名と値を取得
+        const [cookieName, value] = cookies[i].trim().split('=');
+
+        // クッキー名が一致したら、その値をデコードしてreturn
+        if (cookieName === name) {
+          return decodeURIComponent(value);
+        }
+      }
+      // 見つからなかったら空文字をreturn
+      return '';
+    }
+    console.log(getCookie('name'));
+  </script>
+</body>
+
+</html>
