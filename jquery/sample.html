@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>thisの挙動を比較</title>
+  <style>
+    button {
+      margin: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <button id="btn1">普通の関数（function）</button>
+  <button id="btn2">アロー関数（=>）</button>
+
+  <script>
+    // 普通の関数
+    document.getElementById('btn1').addEventListener('click', function () {
+      console.log("functionのthis →", this);
+      this.textContent = 'クリックされました！（function）';
+    });
+
+    // アロー関数
+    document.getElementById('btn2').addEventListener('click', (event) => {
+      console.log("アロー関数のthis →", this);
+      // this は window を指すのでボタンは書き換えられない
+      event.target.textContent = 'クリックされました！（arrow）';
+    });
+  </script>
+</body>
+
+</html>
